@@ -48,5 +48,10 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
-
+    @PatchMapping("/{id}")
+    public ProductResponseDto updateProduct(@PathVariable Long id, @RequestBody CreateProductRequestDto createProductRequestDto) {
+        Product product = productService.updateProduct(id, createProductRequestDto.toProduct());
+        ProductResponseDto productResponseDto = new ProductResponseDto();
+        return productResponseDto.fromProduct(product);
+    }
 }
