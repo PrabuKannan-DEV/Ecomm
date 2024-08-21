@@ -25,6 +25,13 @@ public class ProductController {
         return productResponseDto.fromProduct(product);
     }
 
+    @GetMapping("/{id}")
+    public ProductResponseDto getProduct(@PathVariable("id") Long id) {
+        Product product = productService.getProduct(id);
+        ProductResponseDto productResponseDto = new ProductResponseDto();
+        return productResponseDto.fromProduct(product);
+    }
+
     @GetMapping("")
     public List<ProductResponseDto> getProducts() {
         List<Product> products = productService.getProducts();
@@ -35,4 +42,11 @@ public class ProductController {
         }
         return productResponseDtos;
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+    }
+
+
 }
