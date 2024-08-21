@@ -4,10 +4,10 @@ import com.example.ecomm.dtos.products.CreateProductRequestDto;
 import com.example.ecomm.dtos.products.ProductResponseDto;
 import com.example.ecomm.models.Product;
 import com.example.ecomm.services.ProductService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -23,5 +23,16 @@ public class ProductController {
         Product product = productService.createProduct(createProductRequestDto.toProduct());
         ProductResponseDto productResponseDto = new ProductResponseDto();
         return productResponseDto.fromProduct(product);
+    }
+
+    @GetMapping("")
+    public List<ProductResponseDto> getProducts() {
+        List<Product> products = productService.getProducts();
+        List<ProductResponseDto> productResponseDtos = new ArrayList<>();
+        for (Product product : products) {
+            ProductResponseDto productResponseDto = new ProductResponseDto();
+            productResponseDtos.add(productResponseDto.fromProduct(product));
+        }
+        return productResponseDtos;
     }
 }
