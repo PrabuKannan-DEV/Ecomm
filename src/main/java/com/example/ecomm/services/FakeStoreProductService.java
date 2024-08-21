@@ -59,4 +59,16 @@ public class FakeStoreProductService implements ProductService {
     public void deleteProduct(Long id) {
         restTemplate.delete(fakeStoreProductsApiUrl + "/" + id);
     }
+
+    @Override
+    public Product updateProduct(Long id, Product product) {
+        FakeStoreCreateProductRequestDto fakeStoreCreateProductRequestDto = FakeStoreCreateProductRequestDto.fromProduct(product);
+        FakeStoreProductResponseDto fakeStoreProductResponseDto = restTemplate.patchForObject(
+                fakeStoreProductsApiUrl + "/" + id,
+                fakeStoreCreateProductRequestDto,
+                FakeStoreProductResponseDto.class
+        );
+
+        return fakeStoreProductResponseDto.toProduct();
+    }
 }
