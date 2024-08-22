@@ -71,4 +71,13 @@ public class FakeStoreProductService implements ProductService {
 
         return fakeStoreProductResponseDto.toProduct();
     }
-}
+
+    @Override
+    public void replaceProduct(Long id, Product product) {
+        FakeStoreCreateProductRequestDto fakeStoreCreateProductRequestDto = FakeStoreCreateProductRequestDto.fromProduct(product);
+        restTemplate.put(
+                fakeStoreProductsApiUrl + "/" + id,
+                fakeStoreCreateProductRequestDto
+        );
+
+    }}

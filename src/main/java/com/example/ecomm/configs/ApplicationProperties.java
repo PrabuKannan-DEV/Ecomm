@@ -9,6 +9,8 @@ import org.springframework.web.client.RestTemplate;
 public class ApplicationProperties {
     @Bean
     public RestTemplate createRestTemplate() {
-        return new RestTemplate( new JdkClientHttpRequestFactory());
+        return new RestTemplate(
+                new JdkClientHttpRequestFactory()
+        );
     }
 }

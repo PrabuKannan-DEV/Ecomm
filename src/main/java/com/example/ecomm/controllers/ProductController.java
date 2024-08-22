@@ -54,4 +54,10 @@ public class ProductController {
         ProductResponseDto productResponseDto = new ProductResponseDto();
         return productResponseDto.fromProduct(product);
     }
+
+    @PutMapping("{id}")
+    public String replaceProduct(@PathVariable Long id, @RequestBody CreateProductRequestDto createProductRequestDto) {
+        productService.replaceProduct(id, createProductRequestDto.toProduct());
+        return "Product replaced successfully";
+    }
 }
