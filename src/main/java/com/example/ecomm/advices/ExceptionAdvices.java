@@ -3,9 +3,11 @@ package com.example.ecomm.advices;
 import com.example.ecomm.dtos.ErrorResponseDto;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.web.client.HttpClientErrorException;
 
-@ControllerAdvice
+@ControllerAdvice(annotations = RestController.class)
 public class ExceptionAdvices {
     @ExceptionHandler(Exception.class)
     public ErrorResponseDto handleException(Exception e) {
